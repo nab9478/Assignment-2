@@ -65,7 +65,7 @@ def webServer(port=13331):
       outputdata += b"HTTP/1.1 404 Not Found\r\n" #add not found status
       outputdata += b"\r\n" #end header
       content = b"404 Not Found"
-      connectionSocket.sendall(outputdata.encode() + content.encodoe())
+      connectionSocket.send(outputdata)
       #Fill in end
 
 
