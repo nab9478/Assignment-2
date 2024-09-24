@@ -39,7 +39,7 @@ def webServer(port = 13331):
       outputdata = b"HTTP/1.1 200 OK\r\n" #add ok status
       outputdata += b"Content-Type: text/html; charset=UTF-8\r\n"
       outputdata += b"Connection: keep-alive"
-      outputdata += b"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
+      outputdata += b"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
       outputdata += b"\r\n" #end header
 
 
