@@ -52,7 +52,7 @@ def webServer(port=13331):
       #Send everything as one send command, do not send one line/item at a time!
 
       # Fill in start
-      connectionSocket.sendall(outputdata + content)
+      connectionSocket.sendall(outputdata.encode() + content.encode())
 
       # Fill in end
         
@@ -65,7 +65,7 @@ def webServer(port=13331):
       outputdata += b"HTTP/1.1 404 Not Found\r\n" #add not found status
       outputdata += b"\r\n" #end header
       content = b"404 Not Found"
-      connectionSocket.sendall(outputdata + content)
+      connectionSocket.sendall(outputdata.encode() + content.encodoe())
       #Fill in end
 
 
