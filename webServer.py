@@ -5,11 +5,11 @@ import sys
 
 
 
-def webServer(port=13331):
+def webServer(port = 13331):
   serverSocket = socket(AF_INET, SOCK_STREAM)
   
   #Prepare a server socket
-  serverSocket.bind(("", port))
+  serverSocket.bind(("10.19.250.131", port))
   
   #Fill in start
   serverSocket.listen(1)
@@ -18,11 +18,11 @@ def webServer(port=13331):
   while True:
     #Establish the connection
     
-    #print('Ready to serve...')
+    print('Ready to serve...')
     connectionSocket, addr = serverSocket.accept()    #Fill in end
     
     try:
-      message = connectionSocket.recv(1024).decode()   #Fill in end 
+      message = connectionSocket.recv(1024)   #Fill in end 
       filename = message.split()[1]
       
       #opens the client requested file. 
@@ -36,8 +36,10 @@ def webServer(port=13331):
       #Fill in start 
       
       #Content-Type is an example on how to send a header as bytes. There are more!
-      outputdata = b"Content-Type: text/html; charset=UTF-8\r\n"
-      outputdata += b"HTTP/1.1 200 OK\r\n" #add ok status
+      outputdata = b"HTTP/1.1 200 OK\r\n" #add ok status
+      outputdata += b"Content-Type: text/html; charset=UTF-8\r\n"
+      outputdata += b"Connection: keep-alive"
+      outputdata += b"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"
       outputdata += b"\r\n" #end header
 
 
@@ -62,7 +64,7 @@ def webServer(port=13331):
       # Send response message for invalid request due to the file not being found (404)
       # Remember the format you used in the try: block!
       #Fill in start
-      outputdata += b"HTTP/1.1 404 Not Found\r\n" #add not found status
+      outputdata = b"HTTP/1.1 404 Not Found\r\n" #add not found status
       outputdata += b"\r\n" #end header
       content = b"404 Not Found"
       connectionSocket.send(outputdata)
@@ -76,8 +78,9 @@ def webServer(port=13331):
 
   # Commenting out the below (some use it for local testing). It is not required for Gradescope, and some students have moved it erroneously in the While loop. 
   # DO NOT PLACE ANYWHERE ELSE AND DO NOT UNCOMMENT WHEN SUBMITTING, YOU ARE GONNA HAVE A BAD TIME
-  #serverSocket.close()
-  #sys.exit()  # Terminate the program after sending the corresponding data
+  serverSocket.close()
+  sys.exit()  # Terminate the program after sending the corresponding data
 
 if __name__ == "__main__":
   webServer(13331)
+
