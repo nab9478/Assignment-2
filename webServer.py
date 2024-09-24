@@ -9,10 +9,10 @@ def webServer(port = 13331):
   serverSocket = socket(AF_INET, SOCK_STREAM)
   
   #Prepare a server socket
-  serverSocket.bind(("10.19.250.131", port))
+  serverSocket.bind(("", port))
   
   #Fill in start
-  serverSocket.listen(1)
+  serverSocket.listen()
   #Fill in end
 
   while True:
