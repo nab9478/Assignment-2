@@ -28,7 +28,6 @@ def webServer(port = 13331):
       #opens the client requested file. 
       #Plenty of guidance online on how to open and read a file in python. How should you read it though if you plan on sending it through a socket?
       f = open(filename[1:], 'rb')
-      f.read()
       #fill in end
       
 
@@ -39,8 +38,8 @@ def webServer(port = 13331):
       outputdata = b"HTTP/1.1 200 OK\r\n" #add ok status
       outputdata += b"Content-Type: text/html; charset=UTF-8\r\n"
       outputdata += b"Connection: keep-alive\r\n"
-      outputdata += b"Server: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)\r\n"
       outputdata += b"User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\r\n"
+      outputdata += b"Server: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)\r\n"
       outputdata += b"\r\n" #end header
 
 
@@ -50,7 +49,8 @@ def webServer(port = 13331):
                
       for i in f: #for line in file
       #Fill in start - append your html file contents #Fill in end 
-        outputdata += i
+        html_content = i
+        outputdata += html_content
       #Send the content of the requested file to the client (don't forget the headers you created)!
       #Send everything as one send command, do not send one line/item at a time!
 
